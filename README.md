@@ -128,3 +128,40 @@ button:hover {
 #cartItems {
     margin-bottom: 1em;
 }
+// script.js
+let cart = [];
+
+function addToCart(productName, price) {
+    cart.push({ name: productName, price: price });
+    updateCart();
+}
+
+function updateCart() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    const totalPriceContainer = document.getElementById('totalPrice');
+    
+    // Réinitialiser le contenu du panier
+    cartItemsContainer.innerHTML = '';
+    
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const itemElement = document.createElement('p');
+        itemElement.textContent = `${item.name} - ${item.price}€`;
+        cartItemsContainer.appendChild(itemElement);
+
+        totalPrice += item.price;
+    });
+
+    totalPriceContainer.textContent = totalPrice;
+}
+
+function checkout() {
+    alert("Commande validée ! Merci pour votre achat.");
+    cart = []; // Vider le panier après la commande
+    updateCart();
+}
+
+function scrollToCatalog() {
+    document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+}
